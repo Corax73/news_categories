@@ -8,26 +8,36 @@
 </head>
 <body>
     <div class="container">
+    {{ $categories->links() }}
         <table class="table table-dark table-striped">
                      <thead>
+                        <th>ID</th>
                         <th>Title</th>
                         <th>Parent</th>
+                        <th>Created_at</th>
                     </thead>
                     <tbody>
                        @foreach($categories as $category)
                            @if($category)
                         <tr class="table-info">
                             <td class="table-info">
+                                <p>{{ $category->id }}</p>
+                            </td>
+                            <td class="table-info">
                                 <p>{{ $category->title }}</p>
                             </td>
                             <td class="table-info">
                                 <p>{{ $category->whoParent?->parent_id }}</p>
+                            </td>
+                            <td class="table-info">
+                                <p>{{ $category->created_at }}</p>
                             </td>
                         </tr>
                             @endif
                         @endforeach
                     </tbody>
                 </table>
+                {{ $categories->links() }}
     </div>
 </body>
 </html>
