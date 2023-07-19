@@ -3,12 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Item;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Cache;
-use Faker\Generator as Faker;
 
 class CategoryController extends Controller
 {
+    /**
+     * main page output
+     * @return view
+     */
+    public function main():view
+    {
+        return view('category.main');
+    }
+
     /**
      * unloading categories, displaying parents in the template
      * @return view
@@ -27,6 +36,27 @@ class CategoryController extends Controller
         }
         return view('category.categories', [
             'categories' => $categories
+        ]);
+    }
+
+    /**
+     * unloading items, displaying tags and categories in the template
+     * @return view
+     */
+    public function items():view
+    {
+        $page = request()->get('page', 1);
+        $limit = request()->get('limit', 10);
+        if (Cache::has('items')) {
+            $items = Cache::get('items');
+        } else {
+            $seconds = 300;
+            $items = Cache::remember('items' . $page, $seconds, function() use ($limit){
+                return Item::paginate($limit);
+            });
+        }
+        return view('category.items', [
+            'items' => $items
         ]);
     }
 }

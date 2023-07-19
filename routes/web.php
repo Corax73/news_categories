@@ -16,5 +16,7 @@ use App\Http\Controllers\CategoryController;
 
 Route::controller(CategoryController::class)
 -> group(function () {
-    Route::get('/', 'index')->name('category-list');
+    Route::get('/', 'main')->name('main');
+    Route::get('/categories', 'index')->name('category-list');
+    Route::get('/items', 'items')->name('items-list');
 });

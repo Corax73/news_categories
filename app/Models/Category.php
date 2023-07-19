@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class Category extends Model
 {
@@ -12,9 +13,13 @@ class Category extends Model
     protected $fillable = [
         'title',
     ];
-
-    public function whoParent()
+    
+    /**
+     * returns data by parent
+     * @return Relation
+     */
+    public function whoParent():Relation
     {
-        return $this->hasOne(CategoryParenting::class, 'category_id', 'id');
+        return $this->hasOneThrough(Category::class, CategoryParenting::class, 'category_id', 'id');
     }
 }
