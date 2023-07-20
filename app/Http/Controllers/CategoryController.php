@@ -26,14 +26,10 @@ class CategoryController extends Controller
     {
         $page = request()->get('page', 1);
         $limit = request()->get('limit', 10);
-        if (Cache::has('categories')) {
-            $categories = Cache::get('categories');
-        } else {
-            $seconds = 300;
-            $categories = Cache::remember('categories' . $page, $seconds, function() use ($limit){
-                return Category::paginate($limit);
-            });
-        }
+        $seconds = 300;
+        $categories = Cache::remember('categories' . $page, $seconds, function() use ($limit){
+            return Category::paginate($limit);
+        });
         return view('category.categories', [
             'categories' => $categories
         ]);
@@ -47,14 +43,10 @@ class CategoryController extends Controller
     {
         $page = request()->get('page', 1);
         $limit = request()->get('limit', 10);
-        if (Cache::has('items')) {
-            $items = Cache::get('items');
-        } else {
-            $seconds = 300;
-            $items = Cache::remember('items' . $page, $seconds, function() use ($limit){
-                return Item::paginate($limit);
-            });
-        }
+        $seconds = 300;
+        $items = Cache::remember('items' . $page, $seconds, function() use ($limit){
+            return Item::paginate($limit);
+        });
         return view('category.items', [
             'items' => $items
         ]);

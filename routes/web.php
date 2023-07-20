@@ -20,3 +20,5 @@ Route::controller(CategoryController::class)
     Route::get('/categories', 'index')->name('category-list');
     Route::get('/items', 'items')->name('items-list');
 });
+
+Route::get('/telescope',[TelescopeServiceProvider::class,'gate']);
