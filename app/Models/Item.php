@@ -20,7 +20,7 @@ class Item extends Model
      */
     public function whatCategory():Relation
     {
-        return $this->hasOneThrough(Category::class, CategoryMembership::class, 'item_id', 'id');
+        return $this->hasOneThrough(Category::class, CategoryMembership::class, 'item_id', 'id', 'id', 'category_id');
     }
 
     /**

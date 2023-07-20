@@ -20,6 +20,24 @@ class Category extends Model
      */
     public function whoParent():Relation
     {
-        return $this->hasOneThrough(Category::class, CategoryParenting::class, 'category_id', 'id');
+        return $this->hasOneThrough(Category::class, CategoryParenting::class, 'category_id', 'id', 'id', 'parent_id');
+    }
+
+    /**
+     * returns data by children's
+     * @return Relation
+     */
+    public function whoChildrens():Relation
+    {
+        return $this->hasOneThrough(Category::class, CategoryParenting::class, 'parent_id', 'id', 'id', 'category_id');
+    }
+
+    /**
+     * returns data by items
+     * @return Relation
+     */
+    public function whatItems():Relation
+    {
+        return $this->belongsToMany(Item::class, 'category_memberships', 'category_id', 'item_id');
     }
 }

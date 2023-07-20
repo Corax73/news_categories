@@ -10,6 +10,7 @@
     <div class="container">
         <p><a href="{{ route('category-list') }}">List of categories</a></p>
         <p><a href="{{ route('items-list') }}">List of items</a></p>
+        <p><a href="{{ route('pivot-table') }}">Pivot table</a></p>
     </div>
 </body>
 </html>

@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Item;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Cache;
+use App\Models\CategoryMembership;
 
 class CategoryController extends Controller
 {
@@ -42,13 +43,28 @@ class CategoryController extends Controller
     public function items():view
     {
         $page = request()->get('page', 1);
-        $limit = request()->get('limit', 10);
         $seconds = 300;
-        $items = Cache::remember('items' . $page, $seconds, function() use ($limit){
-            return Item::paginate($limit);
+        $items = Cache::remember('items' . $page, $seconds, function() {
+        return Item::paginate();
         });
         return view('category.items', [
             'items' => $items
+        ]);
+    }
+
+    /**
+     * displays categories with linked items and their linked tags
+     * @return view
+     */
+    public function table():view
+    {
+        $page = request()->get('page', 1);
+        $seconds = 300;
+        $categories = Cache::remember('items' . $page, $seconds, function() {
+            return Category::has('whatItems')->paginate(5);
+        });
+        return view('category.pivot-table', [
+            'categories' => $categories
         ]);
     }
 }

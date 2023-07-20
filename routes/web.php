@@ -19,6 +19,7 @@ Route::controller(CategoryController::class)
     Route::get('/', 'main')->name('main');
     Route::get('/categories', 'index')->name('category-list');
     Route::get('/items', 'items')->name('items-list');
+    Route::get('/pivot-table', 'table')->name('pivot-table');
 });
 
 Route::get('/telescope',[TelescopeServiceProvider::class,'gate']);

@@ -16,12 +16,14 @@ class CategoryMembershipSeeder extends Seeder
     public function run()
     {
         for ($i = 0; $i < 100; $i++) {
-            $category_id = mt_rand(2, 100);
-            $item_id = mt_rand(2, 50);
-            DB::table('category_memberships')->insert([
-                'category_id' => $category_id,
-                'item_id' => $item_id
-            ]);
+            $category_id = mt_rand(2, 50);
+            $item_id = mt_rand(2, 1000);            
+            if ($item_id <= 100) {
+                DB::table('category_memberships')->insert([
+                    'category_id' => $category_id,
+                    'item_id' => $item_id
+                ]);
+            }
         }
     }
 }
