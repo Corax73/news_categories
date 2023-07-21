@@ -15,7 +15,7 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 200; $i++) {
             $faker = \Faker\Factory::create('en');
             $date = $faker->date($format = 'Y-m-d', $max = 'now') . ' ' . $faker->time($format = 'H:i:s', $max = 'now');
             $title = $faker->jobTitle;

@@ -59,7 +59,7 @@ class CategoryController extends Controller
     {
         $page = request()->get('page', 1);
         $seconds = 300;
-        $categories = Cache::remember('items' . $page, $seconds, function() {
+        $categories = Cache::remember('categories' . $page, $seconds, function() {
             return Category::has('whatItems')->with('whatItems')->paginate(5);
         });
         return view('category.pivot-table', [

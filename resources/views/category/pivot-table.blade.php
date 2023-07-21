@@ -23,8 +23,8 @@
                                 <p>{{ $category->title }}</p>
                             </td>
                             <td class="table-info">
-                                @foreach($category->whatItems->toArray() as $item)
-                                <p>{{ $item['title'] }}</p>
+                                @foreach($category->whatItems as $item)
+                                <p>{{ $item->title }}</p>
                                 @endforeach
                             </td>
                             <td class="table-info">
