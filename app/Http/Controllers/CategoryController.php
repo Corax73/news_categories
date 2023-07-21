@@ -6,7 +6,6 @@ use App\Models\Category;
 use App\Models\Item;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Cache;
-use App\Models\CategoryMembership;
 
 class CategoryController extends Controller
 {
@@ -61,7 +60,7 @@ class CategoryController extends Controller
         $page = request()->get('page', 1);
         $seconds = 300;
         $categories = Cache::remember('items' . $page, $seconds, function() {
-            return Category::has('whatItems')->paginate(5);
+            return Category::has('whatItems')->with('whatItems')->paginate(5);
         });
         return view('category.pivot-table', [
             'categories' => $categories
