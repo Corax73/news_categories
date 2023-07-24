@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\QueueController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,5 @@ Route::controller(CategoryController::class)
 });
 
 Route::get('/telescope',[TelescopeServiceProvider::class,'gate']);
+
+Route::get('/jobs',[QueueController::class,'jobs']);
